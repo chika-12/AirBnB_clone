@@ -11,6 +11,11 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
+    def __init__(self):
+        """Initializes the class"""
+
+        super().__init__()
+
     def postcmd(self, stop, line):
         """Quit command to exit the program"""
 
