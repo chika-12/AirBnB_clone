@@ -23,13 +23,13 @@ class FileStorage():
 
     def save(self):
         """Serialization of data"""
-        
+
         serialized_data = {}
         for key, val in self.__objects.items():
             serialized_data[key] = val
 
-        with open(self.__file_path, "w") as json_file:
-            json.dump(serialized_data, json_file, default = str)
+        with open(self.__file_path, "w", encoding="UTF-8") as json_file:
+            json.dump(serialized_data, json_file, default=str)
 
     def reload(self):
         """Deserialization of json file if found"""

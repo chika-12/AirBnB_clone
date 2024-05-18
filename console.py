@@ -3,6 +3,7 @@
 
 import cmd
 import sys
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -23,15 +24,15 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
-    def do_EOF(self, arg):
-        """Exits the program when EOF is reached"""
-
-        return True
+    do_EOF = do_quit
 
     def emptyline(self):
         """Do nothing to empty line"""
 
         pass
+
+    def do_create(self, args):
+        """Creates a BaseModel instance"""
 
 
 if __name__ == '__main__':
