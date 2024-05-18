@@ -1,4 +1,7 @@
+#!/usr/bin/python3
+
 import json
+import os
 
 """Creating a base model from another one"""
 
@@ -6,32 +9,34 @@ import json
 class FileStorage():
     """Creating the file storage model"""
 
-    def __init__(self, file_path="file.json"):
-        """Initializing file storage"""
-
-        self.__file_path = file_path
-        self.__objects = {}  # creating an empty dictionary
+    __file_path = "file.json"
+    __objects = {}  # creating an empty dictionary
 
     def all(self):
         """Returns the dictionary objects"""
-        return __objects
+        return self.__objects
 
     def new(self, obj):
         """Adds a new object to __objects"""
-        key = f"{obj.__class__.__name__}.{obj.id}"
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
 
     def save(self):
         """Serialization of data"""
+        
+        serialized_data = {}
+        for key, val in self.__objects.items():
+            serialized_data[key] = val
 
-        with open(self.__file_path, "w", encoding="UTF-8") as json_file:
-            json.dumps(self.__objects, json_file)
+        with open(self.__file_path, "w") as json_file:
+            json.dump(serialized_data, json_file, default = str)
 
     def reload(self):
         """Deserialization of json file if found"""
 
         try:
-            with open(self__file.path, "r") as file:
+            with open(self.__file_path, "r") as file:
                 self.__objects = json.load(file)
-        except FileNotFoundError:
+                return (self.__objects)
+        except (FileNotFoundError, json.JSONDecodeError):
             pass  # Do nothing
