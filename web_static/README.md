@@ -1,0 +1,1 @@
+This directory contains frontend files for AirBnB project
